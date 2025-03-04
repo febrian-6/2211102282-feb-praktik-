@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 
 void main() {
@@ -6,30 +5,44 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-  // This widget is the root of your application.
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Hello World",
-      home: const MyHomePage(title: "Flutter Hello World Page"),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: GridView.count(
+              primary: false,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              crossAxisCount: 2,
+              children: <Widget>[
+                _buildGridItem("He'd have you all unravel at the", Colors.teal[100]!),
+                _buildGridItem('Heed not the rabble', Colors.teal[200]!),
+                _buildGridItem('Sound of screams but the', Colors.teal[300]!),
+                _buildGridItem('Who scream', Colors.teal[400]!),
+                _buildGridItem('Revolution is coming...', Colors.teal[500]!),
+                _buildGridItem('Revolution, they...', Colors.teal[600]!),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: Center(child: Text('Hello World')),
+  Widget _buildGridItem(String text, Color color) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      color: color,
+      child: Text(
+        text,
+        style: const TextStyle(fontSize: 16),
+      ),
     );
   }
 }
